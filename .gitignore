@@ -1,0 +1,9 @@
+# Old manual backups (git history replaces them; kept only on your computer)
+backup/
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+*.zip

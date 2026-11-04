@@ -1,0 +1,200 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: black;
+}
+
+.word {
+  color: white;
+  font-family: sans-serif;
+  display: inline-block;      /* Keep word together on wrap */
+  white-space: nowrap;        /* Prevent letter-wrapping inside words */
+  margin-right: 0.5ch;        /* Add spacing between words */
+}
+  
+.word.revealed {
+  opacity: 1;
+}
+
+.letter {
+  display: inline;            /* Let letters flow inside the word */
+  font-family: monospace;
+  letter-spacing: 0.05em;
+}
+
+.letter[data-color="red"].visible {
+  color: red !important;
+}
+
+.word-line {
+  position: absolute;
+  white-space: normal;  /* allow line wrap */
+  font-size: 1.2em;
+  max-width: calc(100% - 40px); /* 20px margin on each side */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#desktop-frame {
+  position: absolute;
+  top: 5vh;
+  left: 5vw;
+  width: 90vw;
+  height: 90vh;
+  border: 2px solid white;
+  background-color: black;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#fade-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  opacity: 0;
+  transition: opacity 2s ease;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+#fade-overlay.active {
+  opacity: 1;
+}
+
+#quote {
+  position: absolute;
+  font-size: 1.4em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  text-align: center;
+  color: white;
+  font-family: sans-serif;
+  z-index: 1100;
+}
+
+#quote .word {
+  visibility: hidden;
+}
+
+.quote-line {
+  margin-bottom: 0.5em;
+}
+
+.anna-name {
+  color: red;
+}
+
+#start-button {
+  display: none;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.7em 2em;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  font-family: monospace; /* Match the letter animation font */
+  font-size: 1.2em;
+  cursor: pointer;
+  z-index: 1200;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#start-button:hover {
+  background-color: white;
+  color: black;
+}
+
+.menu-button {
+  padding: 1em 2.5em;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  font-family: monospace;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  width: 300px;
+  text-align: center;
+}
+
+.menu-button:hover {
+  background-color: white;
+  color: black;
+}
+
+#menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  justify-items: center;
+  align-items: center;
+  height: 80%;
+  padding: 2em;
+}
+
+#back-container {
+  display: flex;
+  justify-content: center;
+  padding: 2em;
+}
+
+/* story 1 prelude */
+#story-content {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70vw;
+  color: white;
+  font-family: monospace;
+  font-size: 1.3em;
+  line-height: 1.6em;
+  z-index: 1001;
+}
+
+.story-line {
+  margin-bottom: 1em;
+  white-space: nowrap;
+}
+
+/* animated links */
+.animated-link {
+  text-decoration: none;
+  color: inherit; /* Inherit animation color */
+  text-decoration: underline;
+}
+
+.animated-link:hover {
+  text-decoration: underline;
+  color: #ccc; /* Optional hover color */
+}
+
+/* ascii art */
+#ascii-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  color: white;
+  font-family: monospace;
+  font-size: 0.35em; /* slightly smaller to avoid overflow */
+  line-height: 1em;
+  white-space: pre;
+  text-align: center;
+  pointer-events: none;
+}
