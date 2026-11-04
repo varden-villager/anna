@@ -30,7 +30,7 @@ html, body {
 .word-line {
   position: absolute;
   white-space: normal;  /* allow line wrap */
-  font-size: 1.2em;
+  font-size: clamp(10px, 1.05vw, 16px);  /* small, so ~120 entries can crowd the frame */
   max-width: calc(100% - 40px); /* 20px margin on each side */
   overflow: hidden;
   text-overflow: ellipsis;

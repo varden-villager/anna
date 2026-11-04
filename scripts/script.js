@@ -3,12 +3,16 @@ function wrapLetters() {
   words.forEach(word => {
     const letters = word.textContent.split('');
     word.innerHTML = letters.map(letter =>
-      `<span class="letter" data-final="${letter}"> </span>` // blank at first
+      `<span class="letter" data-final="${letter}">&nbsp;</span>` // invisible placeholder, same width as a letter
     ).join('');
   });
 }
 
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+// Timing of the intro (milliseconds)
+const NAMES_DURATION = 60000;   // one minute, like a minute of silence: time to reveal all names
+const QUOTE_START = 63000;      // when the names fade out and Anna's quote begins
 
 function revealLetter(span, finalChar, duration = 500, speed = 30) {
   const flicker = setInterval(() => {
@@ -43,11 +47,13 @@ function startLetterReveal(timerList = activeTimers, letterElements = null) {
       });
     });
   } else {
-    // For the names section
-    const letters = document.querySelectorAll('.letter');
+    // For the names section: spread all letters evenly over NAMES_DURATION,
+    // so the reveal reaches the last name in time, however many names there are.
+    const letters = document.querySelectorAll('.word-line .letter');
+    const step = NAMES_DURATION / letters.length;
     letters.forEach((span, i) => {
       const finalChar = span.dataset.final;
-      const delay = i * 60;
+      const delay = i * step;
       const timer = setTimeout(() => {
         const { flicker, timeout } = revealLetter(span, finalChar, 800);
         timerList.push(flicker, timeout);
@@ -57,47 +63,17 @@ function startLetterReveal(timerList = activeTimers, letterElements = null) {
   }
 }
 
+// Put every line at a random spot inside the frame.
+// Lines are allowed to overlap: the crowding is intentional.
 function randomizeWordLinePositions() {
-  const lines = document.querySelectorAll('.word-line');
   const frame = document.getElementById('desktop-frame');
-  const frameRect = frame.getBoundingClientRect();
-
   const padding = 20;
-  const placed = [];
 
-  lines.forEach(line => {
-    const lineWidth = line.offsetWidth;
-    const lineHeight = line.offsetHeight;
-
-    let tries = 0;
-    let placedSuccessfully = false;
-
-    while (!placedSuccessfully && tries < 100) {
-      const x = Math.random() * (frameRect.width - lineWidth - 2 * padding) + padding;
-      const y = Math.random() * (frameRect.height - lineHeight - 2 * padding) + padding;
-
-      const newRect = { x, y, width: lineWidth, height: lineHeight };
-
-      const overlaps = placed.some(r =>
-        !(r.x + r.width < newRect.x || r.x > newRect.x + newRect.width ||
-          r.y + r.height < newRect.y || r.y > newRect.y + newRect.height)
-      );
-
-      if (!overlaps) {
-        line.style.left = `${x}px`;
-        line.style.top = `${y}px`;
-        placed.push(newRect);
-        placedSuccessfully = true;
-      }
-
-      tries++;
-    }
-
-    // Fallback in case we couldn't place it without overlap
-    if (!placedSuccessfully) {
-      line.style.left = `${padding}px`;
-      line.style.top = `${padding + placed.length * (lineHeight + 5)}px`;
-    }
+  document.querySelectorAll('.word-line').forEach(line => {
+    const maxX = frame.clientWidth - line.offsetWidth - 2 * padding;
+    const maxY = frame.clientHeight - line.offsetHeight - 2 * padding;
+    line.style.left = `${padding + Math.random() * Math.max(maxX, 0)}px`;
+    line.style.top = `${padding + Math.random() * Math.max(maxY, 0)}px`;
   });
 }
 
@@ -180,17 +156,17 @@ function endAndShowQuote() {
   }, 2000);
 }
 
-// Turn every entry of NAMES (from names.js) into
+// Turn the name of every entry in NAMES (from names.js) into
 // <div class="word-line"><span class="word">...</span> ...</div>
 function buildNameLines() {
   const frame = document.getElementById('desktop-frame');
   const overlay = document.getElementById('fade-overlay');
 
-  NAMES.forEach(name => {
+  NAMES.forEach(entry => {
     const line = document.createElement('div');
     line.className = 'word-line';
 
-    name.split(' ').forEach(wordText => {
+    entry.name.split(' ').forEach(wordText => {
       const word = document.createElement('span');
       word.className = 'word';
       word.textContent = wordText;
@@ -206,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
   wrapLetters();
   randomizeWordLinePositions();
   startLetterReveal();
-  setTimeout(endAndShowQuote, 48000);
+  setTimeout(endAndShowQuote, QUOTE_START);
 });
 
 

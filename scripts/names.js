@@ -1,44 +1,123 @@
-// The names and events shown on the first screen, in chronological order.
-// Each entry becomes one line, placed at a random spot in the frame.
-// To add a person, add a new line here.
+// Everyone remembered in the work, in chronological order.
+// Each entry: name (shown on screen), date, and link (where to read about them; '' = no link).
+// To add a person, add one line in the right place.
 const NAMES = [
-  '50000 - 80000 casualties during the Second Chechen War',  // 1999 - 2009
-  'Artyom Borovik',          // March 2000
-  '132 hostages dead caused by narcotic gas pumped by FSB during the Moscow Theatre Hostage Crisis',  // October 2002
-  'Sergei Yushenkov',        // April 2003
-  'Yuri Shchekochikhin',     // July 2003
-  'Paul Klebnikov',          // July 2004
-  '334 hostages dead during Beslan School Hostage Crisis partly due to the government incompetence',  // September 2004
-  'Anna Politkovskaya',      // October 2006
-  'Alexander Litvinenko',    // November 2006
-  'Stanislav Markelov',      // January 2009
-  'Anastasia Baburova',      // January 2009
-  'Rim Shaygalimov',         // June 2009
-  'Natalya Estemirova',      // July 2009
-  'Sergei Magnitsky',        // November 2009
-  'Mikhail Beketov',         // April 2013
-  'Timur Kuashev',           // August 2014
-  'Ruslan Magomedragimov',   // March 2015
-  'Orkhan Dzhemal',          // July 2018
-  'Alexander Rastorguyev',   // July 2018
-  'Kirill Radchenko',        // July 2018
-  'Nikita Isaev',            // November 2019
-  'Irina Slavina',           // October 2020
-  'Daud Muradov',            // February 2022
-  'Salman Tepsurkaev',       // August 2022
-  'Ivan Petunin (Walkie)',   // September 2022
-  'Dmitry Petrov',           // April 2023
-  'Rifat Dautov',            // January 2024
-  'Miniyar Baiguskarov',     // February 2024
-  'Alexei Navalny',          // February 2024
-  'Alexander Demidenko',     // April 2024
-  'Alexander Perov',         // June 2024
-  'Kirill Buzmakov',         // July 2024
-  'Pavel Kushnir',           // July 2024
-  'Ildar Dadin',             // October 2024
-  'Vladimir Kazantsev',      // December 2024
-  'Roman Shvedov',           // December 2024
-  'Andrey Kotov',            // December 2024
-  'Vadim Stroykin',          // February 2025
-  'Multiple hundreds of thousands lives taken by russian invasion of Ukraine',  // 2022 -
+  { name: '50000 - 80000 casualties during the Second Chechen War', date: '1999 –', link: '' },
+  { name: 'Thousands of victims of enforced disappearances in the North Caucasus', date: '1999 –', link: 'https://memory-project.org/memorial/' },
+  { name: 'Artyom Borovik', date: '9 March 2000', link: 'https://www.theguardian.com/world/2000/mar/10/russia.iantraynor' },
+  { name: 'Igor Domnikov', date: '16 July 2000', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Igor%20Domnikov%2C%20Novaya%20Gazeta' },
+  { name: 'Sergey Novikov', date: '26 July 2000', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Sergey%20Novikov%2C%20Radio%20Vesna' },
+  { name: 'Iskandar Khatloni', date: '21 September 2000', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Iskandar%20Khatloni%2C%20Radio%20Free%20Europe' },
+  { name: 'Sergey Ivanov', date: '3 October 2000', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Sergey%20Ivanov%2C%20Lada-TV' },
+  { name: 'Adam Tepsurgayev', date: '21 November 2000', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Adam%20Tepsurgayev%2C%20Reuters' },
+  { name: 'Eduard Markevich', date: '18 September 2001', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Eduard%20Markevich%2C%20Novy%20Reft' },
+  { name: 'Natalya Skryl', date: '9 March 2002', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Natalya%20Skryl%2C%20Nashe%20Vremya' },
+  { name: 'Valery Ivanov', date: '29 April 2002', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Valery%20Ivanov%2C%20Tolyattinskoye' },
+  { name: '132 hostages dead caused by narcotic gas pumped by FSB during the Moscow Theatre Hostage Crisis', date: 'October 2002', link: '' },
+  { name: 'Sergei Yushenkov', date: '17 April 2003', link: 'https://www.theguardian.com/world/2003/apr/18/russia.nickpatonwalsh1' },
+  { name: 'Dmitry Shvets', date: '18 April 2003', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Dmitry%20Shvets%2C%20TV-21' },
+  { name: 'Yuri Shchekochikhin', date: '3 July 2003', link: 'https://cpj.org/data/people/yuri-shchekochikhin/' },
+  { name: 'Aleksei Sidorov', date: '9 October 2003', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Aleksei%20Sidorov%2C%20Tolyattinskoye' },
+  { name: 'Paul Klebnikov', date: '9 July 2004', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Paul%20Klebnikov%2C%20Forbes%20Russia' },
+  { name: '334 hostages dead during Beslan School Hostage Crisis partly due to the government incompetence', date: 'September 2004', link: '' },
+  { name: 'Magomedzagid Varisov', date: '28 June 2005', link: 'https://cpj.org/reports/2006/11/russia-murders/#:~:text=Magomedzagid%20Varisov%2C%20Novoye%20Delo' },
+  { name: 'Anna Politkovskaya', date: '7 October 2006', link: 'https://cpj.org/data/people/anna-politkovskaya/' },
+  { name: 'Alexander Litvinenko', date: '23 November 2006', link: 'https://www.britannica.com/biography/Alexander-Litvinenko' },
+  { name: 'Stanislav Markelov', date: '19 January 2009', link: 'https://en.wikipedia.org/wiki/Stanislav_Markelov' },
+  { name: 'Anastasia Baburova', date: '19 January 2009', link: 'https://en.wikipedia.org/wiki/Anastasia_Baburova' },
+  { name: 'Rim Shaigalimov', date: '27 June 2009', link: 'https://memopzk.org/en/figurant/shajgalimov-rim-karimovich/' },
+  { name: 'Natalya Estemirova', date: '15 July 2009', link: 'https://en.wikipedia.org/wiki/Natalya_Estemirova' },
+  { name: 'Sergei Magnitsky', date: '16 November 2009', link: 'https://memopzk.org/en/figurant/magnitskij-sergej-leonidovich/' },
+  { name: 'Vasily Aleksanyan', date: '3 October 2011', link: 'https://memopzk.org/en/figurant/aleksanyan-vasilij-georgievich/' },
+  { name: 'Mikhail Beketov', date: 'April 2013', link: 'https://cpj.org/2013/04/beketovs-untimely-death-and-putins-unfulfilled-pro/' },
+  { name: 'Timur Kuashev', date: 'August 2014', link: 'https://en.wikipedia.org/wiki/Timur_Kuashev' },
+  { name: 'Ruslan Magomedragimov', date: 'March 2015', link: 'https://en.wikipedia.org/wiki/Ruslan_Magomedragimov' },
+  { name: 'Yevgeny Afanasyev', date: '14 April 2015', link: 'https://memopzk.org/en/figurant/afanasev-evgenij-vasilevich/' },
+  { name: 'Tagir Khasanov', date: '17 January 2017', link: 'https://memopzk.org/en/figurant/hasanov-tagir/' },
+  { name: 'Orkhan Dzhemal', date: 'July 2018', link: 'https://cpj.org/data/people/orkhan-dzhemal/' },
+  { name: 'Alexander Rastorguyev', date: 'July 2018', link: 'https://dokweb.net/database/persons/biography/6b244bd9-dc1d-4323-8d77-ad3d901626aa/alexander-rastorguev' },
+  { name: 'Kirill Radchenko', date: 'July 2018', link: 'https://cpj.org/data/people/kirill-radchenko/' },
+  { name: 'Nikita Isaev', date: 'November 2019', link: 'https://en.wikipedia.org/wiki/Nikita_Isaev' },
+  { name: 'Viktor Malkov', date: '26 April 2020', link: 'https://memopzk.org/en/figurant/malkov-viktor-ivanovich/' },
+  { name: 'Irina Slavina', date: '2 October 2020', link: 'https://en.wikipedia.org/wiki/Irina_Slavina_(journalist)' },
+  { name: 'Yuri Kim', date: '30 October 2020', link: 'https://memopzk.org/en/figurant/kim-yurij-aleksandrovich/' },
+  { name: 'Aleksandr Tolmachev', date: '9 November 2020', link: 'https://memopzk.org/en/figurant/tolmachyov-aleksandr-mihajlovich/' },
+  { name: 'Ildarkhan Rizakhanov', date: 'February 2021', link: 'https://memopzk.org/en/figurant/rizahanov-ildarhan-magomedovich/' },
+  { name: 'Viktor Kudryavtsev', date: '29 April 2021', link: 'https://memopzk.org/en/figurant/kudryavczev-viktor-viktorovich/' },
+  { name: 'Daud Muradov', date: '6 February 2022', link: 'https://memopzk.org/en/figurant/muradov-daud-arbievich/' },
+  { name: 'Roman Kovalev', date: '27 April 2022', link: 'https://memopzk.org/en/figurant/kovalyov-roman/' },
+  { name: 'Dmitry Kolker', date: '3 July 2022', link: 'https://memopzk.org/en/figurant/kolker-dmitrij-borisovich/' },
+  { name: '53 Ukrainian prisoners of war killed in the Olenivka prison massacre', date: '29 July 2022', link: 'https://ukraine.un.org/en/274954-olenivka-two-years-deadly-strike-killed-dozens-ukrainian-pows-continued-call-accountability' },
+  { name: 'Salman Tepsurkaev', date: 'August 2022', link: 'https://memopzk.org/en/figurant/tepsurkaev-salman-shirvanievich/' },
+  { name: 'Vasyl Stetsenko', date: '3 August 2022', link: 'https://memopzk.org/en/figurant/steczenko-vasilij-sergeevich/' },
+  { name: 'Ivan Petunin (Walkie)', date: 'September 2022', link: 'https://mixmag.net/read/russian-rapper-walkie-suicide-suspected-avoid-war-news' },
+  { name: 'Valery Mitko', date: '2 October 2022', link: 'https://memopzk.org/en/figurant/mitko-valerij-bronislavovich/' },
+  { name: 'Pavlo Bozhko', date: 'January 2023', link: 'https://memopzk.org/en/figurant/bozhko-pavel-gennadevich/' },
+  { name: 'Kostiantyn Shyrinh', date: '7 February 2023', link: 'https://memopzk.org/en/figurant/shiring-konstantin/' },
+  { name: 'Dzhemil Hafarov', date: '10 February 2023', link: 'https://memopzk.org/en/figurant/gafarov-dzhemil-abdullaevich/' },
+  { name: 'Dmitry Petrov', date: 'April 2023', link: 'https://en.wikipedia.org/wiki/Dmitry_Petrov_(anarchist)' },
+  { name: 'Anatoly Berezikov', date: '14 June 2023', link: 'https://memopzk.org/en/figurant/berezikov-anatolij/' },
+  { name: 'Lyudmila Tokareva', date: '12 August 2023', link: 'https://memopzk.org/en/figurant/tokareva-lyudmila-nikolaevna/' },
+  { name: 'Viktor Lapitsky', date: 'September 2023', link: 'https://memopzk.org/en/figurant/lapiczkij-viktor-ivanovich/' },
+  { name: 'Nataliia Sevostianova', date: '15 September 2023', link: 'https://memopzk.org/en/figurant/sevostyanova-natalya-nikolaevna/' },
+  { name: 'Elena Markova', date: 'November 2023', link: 'https://memopzk.org/en/figurant/markova-elena-eduardovna/' },
+  { name: 'Sergei Yatsenko', date: '8 November 2023', link: 'https://memopzk.org/en/figurant/yaczenko-sergej/' },
+  { name: 'Krzysztof Galos', date: 'December 2023', link: 'https://memopzk.org/en/figurant/galos-kshishtof/' },
+  { name: 'Rifat Dautov', date: '26 January 2024', link: 'https://memopzk.org/en/figurant/dautov-rifat-fuatovich/' },
+  { name: 'Minniyar Baiguskarov', date: 'February 2024', link: 'https://memopzk.org/en/figurant/bajguskarov-minniyar-bulatovich/' },
+  { name: 'Viktor Demchenko', date: '11 February 2024', link: 'https://memopzk.org/en/figurant/demchenko-viktor-pavlovich/' },
+  { name: 'Alexei Navalny', date: '16 February 2024', link: 'https://memopzk.org/en/figurant/navalnyj-aleksej-anatolevich/' },
+  { name: 'Mykola Skyba', date: '13 March 2024', link: 'https://memopzk.org/en/figurant/skiba-nikolaj-yurevich/' },
+  { name: 'Aleksandr Demidenko', date: '5 April 2024', link: 'https://memopzk.org/en/figurant/demidenko-aleksandr-nikolaevich/' },
+  { name: 'Pavlo Hrymak', date: 'May 2024', link: 'https://memopzk.org/en/figurant/grimak-pavel/' },
+  { name: 'Danylo Dakhov', date: 'May 2024', link: 'https://memopzk.org/en/figurant/dahov-daniil/' },
+  { name: 'Oleh Pronko', date: 'May 2024', link: 'https://memopzk.org/en/figurant/pronko-oleg/' },
+  { name: 'Tetiana Plachkova', date: '23 May 2024', link: 'https://memopzk.org/en/figurant/plachkova-tatyana/' },
+  { name: 'Aleksandr Perov', date: '10 June 2024', link: 'https://memopzk.org/en/figurant/perov-aleksandr-anatolevich/' },
+  { name: 'Igor Pokusin', date: '11 June 2024', link: 'https://memopzk.org/en/figurant/pokusin-igor-borisovich/' },
+  { name: 'Kirill Buzmakov', date: 'July 2024', link: 'https://memopzk.org/en/figurant/buzmakov-kirill-sergeevich-2' },
+  { name: 'Pavel Kushnir', date: '27 July 2024', link: 'https://memopzk.org/en/figurant/kushnir-pavel-mihajlovich/' },
+  { name: 'Oleksandr Ishchenko', date: '31 July 2024', link: 'https://memopzk.org/en/figurant/ishhenko-oleksandr-oleksandrovych/' },
+  { name: 'Roman Zarovnyaev', date: 'August 2024', link: 'https://memopzk.org/en/figurant/zarovnyaev-roman-vyacheslavovich/' },
+  { name: 'Viktoriia Roshchyna', date: '19 September 2024', link: 'https://memopzk.org/en/figurant/roshhina-viktoriya-vladimirovna/' },
+  { name: 'Dmitry Polunin', date: '21 September 2024', link: 'https://memopzk.org/en/figurant/polunin-dmitrij-valerevich/' },
+  { name: 'Ildar Dadin', date: 'October 2024', link: 'https://www.bbc.com/news/articles/cq5eyqjz1yjo' },
+  { name: 'Aleksandr Lubin', date: '11 November 2024', link: 'https://memopzk.org/en/figurant/lubin-aleksandr-nikolaevich/' },
+  { name: 'Mansur Abdulkadyrov', date: 'December 2024', link: 'https://memopzk.org/en/figurant/abdulkadyrov-mansur/' },
+  { name: 'Andrii Borzunov', date: '3 December 2024', link: 'https://memopzk.org/en/figurant/borzunov-andrej-germanovich/' },
+  { name: 'Yevhen Matvieiev', date: '4 December 2024', link: 'https://memopzk.org/en/figurant/matveev-evgenij-sergeevich/' },
+  { name: 'Vladimir Kazantsev', date: '17 December 2024', link: 'https://memopzk.org/en/figurant/kazanczev-vladimir-nikolaevich/' },
+  { name: 'Roman Shvedov', date: '18 December 2024', link: 'https://memopzk.org/en/figurant/shvedov-roman-valerevich/' },
+  { name: 'Andrei Kotov', date: '29 December 2024', link: 'https://memopzk.org/en/figurant/kotov-andrej-evgenevich/' },
+  { name: 'Volodymyr Udovyka', date: '2024', link: 'https://memopzk.org/en/figurant/udovika-vladimir-ilich/' },
+  { name: 'Vishkhan Tazurkaev', date: 'January 2025', link: 'https://memopzk.org/en/figurant/tazurkaev-vishan/' },
+  { name: 'Sergei Nevorotin', date: '10 January 2025', link: 'https://memopzk.org/en/figurant/nevorotin-sergej-vladimirovich/' },
+  { name: 'Ismail Mukhadiev', date: '31 January 2025', link: 'https://memopzk.org/en/figurant/muhadiev-ismail/' },
+  { name: 'Vadim Stroikin', date: '6 February 2025', link: 'https://memopzk.org/en/figurant/strojkin-vadim-vladimirovich/' },
+  { name: 'Rustem Virati', date: '10 February 2025', link: 'https://memopzk.org/en/figurant/virati-rustem-rizaevich/' },
+  { name: 'Roman Tyurin', date: '17 February 2025', link: 'https://memopzk.org/en/figurant/tyurin-roman-vladimirovich/' },
+  { name: 'Aslan Dombaev', date: '17 March 2025', link: 'https://memopzk.org/en/figurant/dombaev-aslan/' },
+  { name: 'Valery Bailo', date: '21 March 2025', link: 'https://memopzk.org/en/figurant/bajlo-valerij-semenovich/' },
+  { name: 'Vasily Raskov', date: '2 April 2025', link: 'https://memopzk.org/en/figurant/raskov-vasilij-viktorovich/' },
+  { name: 'Oleksandr Markov', date: '26 June 2025', link: 'https://memopzk.org/en/figurant/markov-aleksandr/' },
+  { name: 'Andrii Zdorenko', date: '3 September 2025', link: 'https://memopzk.org/en/figurant/zdorenko-andrej-vasilevich/' },
+  { name: 'Shovda Shamaeva', date: '8 September 2025', link: 'https://memopzk.org/en/figurant/shomaeva-shovda/' },
+  { name: 'Zaur Shogentsukov', date: '19 December 2025', link: 'https://memopzk.org/en/figurant/shogenczukov-zaur-mihajlovich/' },
+  { name: 'Roman Sidorkin', date: '9 January 2026', link: 'https://memopzk.org/en/figurant/sidorkin-roman-anatolevich/' },
+  { name: 'Aleksandr Dotsenko', date: '19 February 2026', link: 'https://memopzk.org/en/figurant/doczenko-aleksandr-leonidovich/' },
+  { name: 'Nikolai Voishchev', date: '28 February 2026', link: 'https://memopzk.org/en/figurant/voishhev-nikolaj/' },
+  { name: 'Vladimir Osipov', date: '18 March 2026', link: 'https://memopzk.org/en/figurant/osipov-vladimir-pavlovich/' },
+  { name: 'Andrei Akuzin', date: '8 April 2026', link: 'https://memopzk.org/en/figurant/akuzin-andrej-viktorovich/' },
+  { name: 'Khristolyub Vegan', date: '17 April 2026', link: 'https://memopzk.org/en/figurant/vegan-hristolyub-bozhij/' },
+  { name: 'Oleg Tyryshkin', date: '25 April 2026', link: 'https://memopzk.org/en/figurant/tyryshkin-oleg-vasilevich/' },
+  { name: 'Vladimir Yarotsky', date: '7 May 2026', link: 'https://memopzk.org/en/figurant/yaroczkij-vladimir-fyodorovich/' },
+  { name: 'Sergei Sviridov', date: '12 June 2026', link: 'https://memopzk.org/en/figurant/sviridov-sergej-aleksandrovich/' },
+  { name: 'Oleh Kotov', date: 'July 2026', link: 'https://memopzk.org/en/figurant/kotov-oleg/' },
+  { name: 'Sergei Mingazov', date: '2 July 2026', link: 'https://memopzk.org/en/figurant/mingazov-sergej-gafetdinovich/' },
+  { name: 'Nikolai Popov', date: '7 July 2026', link: 'https://memopzk.org/en/figurant/popov-nikolaj-yurevich/' },
+  { name: 'Ibrahim Kudzhanov', date: '8 July 2026', link: 'https://memopzk.org/en/figurant/kudzhanov-ibragim-zhivdatovich/' },
+  { name: 'Rustam Khalikov', date: '27 September 2026', link: 'https://memopzk.org/en/figurant/halikov-rustam-osmanovich/' },
+  { name: 'Igor Yakovenko', date: '8 October 2026', link: 'https://memopzk.org/en/figurant/yakovenko-igor-viktorovich/' },
+  { name: 'Aleksandr Kondratov', date: '26 October 2026', link: 'https://memopzk.org/en/figurant/kondratov-aleksandr-sergeevich/' },
+  { name: 'Multiple hundreds of thousands lives taken by russian invasion of Ukraine', date: '2022 –', link: '' },
 ];
