@@ -180,7 +180,29 @@ function endAndShowQuote() {
   }, 2000);
 }
 
+// Turn every entry of NAMES (from names.js) into
+// <div class="word-line"><span class="word">...</span> ...</div>
+function buildNameLines() {
+  const frame = document.getElementById('desktop-frame');
+  const overlay = document.getElementById('fade-overlay');
+
+  NAMES.forEach(name => {
+    const line = document.createElement('div');
+    line.className = 'word-line';
+
+    name.split(' ').forEach(wordText => {
+      const word = document.createElement('span');
+      word.className = 'word';
+      word.textContent = wordText;
+      line.appendChild(word);
+    });
+
+    frame.insertBefore(line, overlay);
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  buildNameLines();
   wrapLetters();
   randomizeWordLinePositions();
   startLetterReveal();
