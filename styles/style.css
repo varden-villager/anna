@@ -153,20 +153,22 @@ html, body {
 /* story 1 prelude */
 #story-content {
   position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70vw;
+  inset: 0;                  /* fill the whole frame */
+  padding: 9vh 10vw 4vh;     /* same placement as before: ~10% from top, 70vw wide */
+  overflow-y: auto;          /* last resort on tiny screens: scroll instead of cutting text off */
+  scrollbar-width: thin;
+  scrollbar-color: #444 black;
   color: white;
   font-family: monospace;
-  font-size: 1.3em;
-  line-height: 1.6em;
+  /* Grows and shrinks with the window: never below 13px, never above 21px (the old 1.3em) */
+  font-size: clamp(13px, min(1.45vw, 2.4vh), 21px);
+  line-height: 1.6;
   z-index: 1001;
 }
 
 .story-line {
   margin-bottom: 1em;
-  white-space: nowrap;
+  white-space: normal;       /* long lines wrap instead of running off the right edge */
 }
 
 /* animated links */
@@ -192,7 +194,9 @@ html, body {
   overflow: hidden;
   color: white;
   font-family: monospace;
-  font-size: 0.35em; /* slightly smaller to avoid overflow */
+  /* The art is 300 characters wide and up to 120 lines tall.
+     Shrink it on small windows so it fits the frame; 5.6px is the old size (0.35em). */
+  font-size: min(5.6px, 0.48vw, 0.72vh);
   line-height: 1em;
   white-space: pre;
   text-align: center;

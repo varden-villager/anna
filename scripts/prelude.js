@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const span = document.createElement('span');
           span.classList.add('letter');
           span.dataset.final = letter;
-          span.textContent = ' ';
+          span.textContent = /\s/.test(letter) ? letter : '\u00A0'; // real space, or a non-breaking placeholder
           newLine.appendChild(span);
         });
       } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName === 'A') {
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const span = document.createElement('span');
           span.classList.add('letter');
           span.dataset.final = letter;
-          span.textContent = ' ';
+          span.textContent = /\s/.test(letter) ? letter : '\u00A0'; // real space, or a non-breaking placeholder
           link.appendChild(span);
         });
 
@@ -37,9 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
     line.replaceWith(newLine);
   });
 
+  const story = document.getElementById('story-content');
+  fitTextToFrame(story);
+  window.addEventListener('resize', () => fitTextToFrame(story));
+
   const allLetters = document.querySelectorAll('.letter');
 
   function revealLetter(span, delay) {
+    if (/\s/.test(span.dataset.final)) return; // spaces are already in place
     const flicker = setInterval(() => {
       span.textContent = characters[Math.floor(Math.random() * characters.length)];
     }, 30);
@@ -55,3 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
     revealLetter(span, i * 30);
   });
 });
+
+// Shrink the text until everything fits inside the frame, so no scrolling is needed.
+// Runs again whenever the window is resized.
+function fitTextToFrame(box) {
+  box.style.fontSize = '';                                  // start from the CSS size
+  let size = parseFloat(getComputedStyle(box).fontSize);
+  while (box.scrollHeight > box.clientHeight && size > 10) {
+    size -= 0.5;
+    box.style.fontSize = size + 'px';
+  }
+}
