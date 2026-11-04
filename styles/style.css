@@ -117,7 +117,13 @@ html, body {
 }
 
 .menu-button {
-  padding: 1em 2.5em;
+  /* Every menu box is the same size; text is centered and may wrap onto 2 lines */
+  width: 300px;
+  height: 3.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1em;
   background-color: black;
   color: white;
   border: 2px solid white;
@@ -125,8 +131,8 @@ html, body {
   font-size: 1.5em;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-  width: 300px;
   text-align: center;
+  text-decoration: none;   /* menu items are links now: no underline */
 }
 
 .menu-button:hover {
