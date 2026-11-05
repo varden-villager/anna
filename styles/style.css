@@ -287,3 +287,17 @@ a.credits-name:hover {
 .menu-wide {
   grid-column: 1 / -1;
 }
+
+/* pages with <body class="centered">: the text block sits in the middle of the frame,
+   the lines inside it stay flush left */
+.centered #story-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: safe center;   /* newer browsers: never push text out of view */
+  margin: 0 auto;                 /* centre the block horizontally */
+  width: fit-content;             /* as wide as its longest line... */
+  max-width: 76%;                 /* ...but never wider than this */
+  padding: 6vh 0;                 /* same space above and below */
+  text-align: left;
+}

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showStory() {
     const story = document.getElementById('story-content');
-    story.style.display = 'block';
+    story.style.display = '';   // back to what the CSS says
 
     const lines = story.querySelectorAll('.story-line');
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -60,6 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const link = document.createElement('a');
           link.href = node.getAttribute('href');
           link.className = node.className;
+          if (node.target) {          // keep "open in a new tab" for links to sources
+            link.target = node.target;
+            link.rel = 'noopener';
+          }
           node.textContent.split('').forEach(char => {
             const span = document.createElement('span');
             span.classList.add('letter');

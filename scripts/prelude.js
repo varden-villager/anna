@@ -20,6 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const link = document.createElement('a');
         link.href = node.href;
         link.className = 'animated-link';
+        if (node.target) {            // keep "open in a new tab" for links to sources
+          link.target = node.target;
+          link.rel = 'noopener';
+        }
 
         const letters = node.textContent.split('');
         letters.forEach(letter => {

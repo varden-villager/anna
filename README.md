@@ -19,6 +19,7 @@ No build step. Open `index.html` in a browser, or serve the folder with any stat
 | `names.html` + `scripts/credits.js` | All names as rolling credits, each linking to their story |
 | `prelude/` | Chapter "Prelude", starts at `story1.html` |
 | `cult-of-victory/` | Chapter "The Cult of Victory", starts at `story2.html` |
+| `my-homeland/` | Chapter "My Homeland": Chechen children's essays from Anna Politkovskaya's article "War Sees No One" (2000), starts at `homeland.html` |
 | `adaptation/` | Chapter "Adaptation", starts at `adaptation.html` |
 | `scripts/prelude.js`, `scripts/ascii.js` | Letter-by-letter text reveal; ASCII art pages load the art first |
 | `styles/style.css` | All styling |
