@@ -205,7 +205,7 @@ html, body {
   font-size: min(5.6px, 0.48vw, 0.72vh);
   line-height: 1em;
   white-space: pre;
-  text-align: center;
+  text-align: left;   /* keep every line of the art in its drawn position */
   pointer-events: none;
 }
 

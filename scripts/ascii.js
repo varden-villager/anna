@@ -1,13 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('ascii-container');
-  const lines = container.textContent.split('\n');
-  container.textContent = '';
+  const pre = container.querySelector('pre');
+
+  // Read only the art inside <pre>, without the empty lines and the HTML
+  // indentation around it (that indentation used to shift the first line right).
+  const art = pre.textContent.replace(/^\s*\n/, '').trimEnd();
+  const lines = art.split('\n');
+  pre.textContent = '';
 
   let i = 0;
 
   function showNextLine() {
     if (i < lines.length) {
-      container.textContent += lines[i] + '\n';
+      pre.textContent += lines[i] + '\n';
       i++;
       setTimeout(showNextLine, 30); // Speed of ASCII load-in
     } else {
