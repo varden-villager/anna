@@ -7,3 +7,6 @@ Thumbs.db
 desktop.ini
 .vscode/
 *.zip
+
+# Files the Claude app saves into this folder
+Claude outputs/

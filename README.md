@@ -12,11 +12,15 @@ No build step. Open `index.html` in a browser, or serve the folder with any stat
 
 ## Structure
 
-| File | Role |
+| Where | What |
 | --- | --- |
-| `index.html` + `scripts/script.js` | Names of victims appear at random positions, then Anna's quote and the Start button |
-| `menu.html` + `scripts/menu.js` | Chapter menu |
-| `story1.html`, `story2.html` and the pages they link to | Chapters. Text pages use `scripts/prelude.js`; ASCII art pages use `scripts/ascii.js` |
+| `index.html` + `scripts/script.js` | Intro: names of the victims (from `scripts/names.js`) appear for one minute, then Anna's quote and the Start button |
+| `menu.html` | Chapter menu |
+| `names.html` + `scripts/credits.js` | All names as rolling credits, each linking to their story |
+| `prelude/` | Chapter "Prelude", starts at `story1.html` |
+| `cult-of-victory/` | Chapter "The Cult of Victory", starts at `story2.html` |
+| `adaptation/` | Chapter "Adaptation", starts at `adaptation.html` |
+| `scripts/prelude.js`, `scripts/ascii.js` | Letter-by-letter text reveal; ASCII art pages load the art first |
 | `styles/style.css` | All styling |
 
 ASCII art made with https://www.ascii-art-generator.org/.
