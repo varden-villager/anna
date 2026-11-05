@@ -208,3 +208,82 @@ html, body {
   text-align: center;
   pointer-events: none;
 }
+
+/* names page: rolling credits */
+#credits {
+  position: absolute;
+  inset: 0 0 8em 0;          /* stop well above the Back button */
+  overflow: hidden;
+  /* names fade in at the bottom and fade out at the top */
+  mask-image: linear-gradient(transparent, black 15%, black 85%, transparent);
+}
+
+#credits-list {
+  position: absolute;
+  top: 0;                    /* moved by credits.js with transform */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  font-family: monospace;
+  color: white;
+}
+
+/* upper zone: while the mouse is here, the list rolls back */
+#credits-rewind {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 15%;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  padding-top: 0.6em;
+  color: #333;
+  font-size: 0.9em;
+  cursor: n-resize;
+  transition: color 0.3s;
+}
+
+#credits-rewind:hover {
+  color: #aaa;
+}
+
+#credits-list li {
+  width: fit-content;        /* hover area = the text itself, not the whole row */
+  margin: 0 auto 1.6em;
+}
+
+.credits-name {
+  display: block;
+  font-size: clamp(14px, 1.4vw, 20px);
+  color: white;
+  text-decoration: none;
+}
+
+a.credits-name:hover {
+  text-decoration: underline;
+  color: #ccc;
+}
+
+.credits-heading {
+  margin: 3em auto 2em;
+  font-size: clamp(12px, 1vw, 15px);
+  letter-spacing: 0.3em;
+  color: #888;
+}
+
+#credits-back {
+  position: absolute;
+  bottom: 1.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+/* menu item that spans both columns */
+.menu-wide {
+  grid-column: 1 / -1;
+}
